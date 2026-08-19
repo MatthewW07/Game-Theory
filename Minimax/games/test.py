@@ -1,26 +1,26 @@
 
-
+# Testing the minimax implementation with a very simple State class
 class State:
     def __init__(self, evaluation=None, branches=None):
         self.evaluation = evaluation
         self.branches = branches
-        self.turn = None
+
 
     def __repr__(self):
         return f"{self.evaluation}"
 
+    # For testing, the branches are manually set
     def get_moves(self):
         if self.branches is None:
             self.branches = []
         return self.branches
 
+    # For testing, the evaluation is manually set
     def get_evaluation(self):
         return self.evaluation if self.evaluation is not None else 0
 
 
-
 if __name__ == "__main__":
-
     test = State(
         branches=[
             State(branches=[

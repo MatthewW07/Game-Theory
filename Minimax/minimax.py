@@ -94,9 +94,7 @@ class Minimax:
                 return min_eval
 
 
-        # self.create_tree()
-        return brute_force(self.tree, self.is_max, self.depth)
-    
+        # return brute_force(self.tree, self.is_max, self.depth)
         return alpha_beta(self.tree, self.is_max, self.depth)
     
 
@@ -148,10 +146,7 @@ class Minimax:
 
 
 if __name__ == "__main__":
-
-    # ======== TESTING ======== #
-
-    # Should result in a Tie (3.0)
+    # Should result in a Tie (2.0)
     from games.tic_tac_toe import State
     initial_state = State()
     minimax = Minimax(initial_state, depth=10)

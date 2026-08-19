@@ -1,5 +1,5 @@
 
-# In an ideal game, there will be a Tie (or a 3.0 evaluation)
+# In an ideal game, there will be a Tie (or a 2.0 evaluation)
 class State:
     def __init__(self, turn: str="X", grid=None):
         self.evaluation = None
@@ -7,10 +7,10 @@ class State:
         self.turn = turn
         self.grid = grid if grid is not None else [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]]
 
-    # ======== REQUIRED METHODS ======== #
 
     def __repr__(self):
         return f"State(turn={self.turn}, grid={self.grid})"
+
 
     def get_moves(self) -> list[State]:
 
@@ -25,6 +25,7 @@ class State:
                     self.branches.append(State("X" if self.turn == "O" else "O", new_grid))
         
         return self.branches
+    
 
     def get_evaluation(self) -> float:
 
