@@ -3,7 +3,7 @@
 class State:
     def __init__(self, turn: str="X", grid=None):
         self.evaluation = None
-        self.branches = []
+        self.branches = None
         self.turn = turn
         self.grid = grid if grid is not None else [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]]
 
@@ -13,6 +13,9 @@ class State:
         return f"State(turn={self.turn}, grid={self.grid})"
 
     def get_moves(self) -> list[State]:
+
+        if self.branches is None:
+            self.branches = []
 
         for i in range(3):
             for j in range(3):

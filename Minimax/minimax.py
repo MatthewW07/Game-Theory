@@ -9,11 +9,11 @@ class State:
         self.evaluation
         self.branches
 
-    def branches(self) -> list[State]:
+    def get_moves(self) -> list[State]:
         ...
         return self.branches
 
-    def evaluation(self) -> float:
+    def get_evaluation(self) -> float:
         ...
         return self.evaluation
 """
@@ -39,19 +39,23 @@ class Minimax:
 
         # Create the state tree
     
-        # self.create_tree()
-        def brute_dfs(node: State, is_max: bool, depth: int) -> float:
-            if depth == 0:
+        def brute_force(node: State, is_max: bool, depth: int) -> float:
+
+            # Edge cases
+            if node.branches is None:
+                node.get_moves()
+
+            if depth == 0 or node.branches == []:
                 return node.get_evaluation()
 
             # Maximizer
             if is_max:
-                options = [brute_dfs(branch, 0, depth-1) for branch in node.branches]
+                options = [brute_force(branch, 0, depth-1) for branch in node.branches]
                 return max(options) if options else node.get_evaluation()
 
             # Minimizer
             else:
-                options = [brute_dfs(branch, 1, depth-1) for branch in node.branches]
+                options = [brute_force(branch, 1, depth-1) for branch in node.branches]
                 return min(options) if options else node.get_evaluation()
 
             
@@ -59,7 +63,12 @@ class Minimax:
         # ======== ALPHA-BETA IMPLEMENTATION ======== #
 
         def alpha_beta(node: State, is_max: bool, depth: int, alpha=-math.inf, beta=math.inf) -> float:
-            if depth == 0 or not node.branches:
+
+            # Edge cases
+            if node.branches is None:
+                node.get_moves()
+
+            if depth == 0 or node.branches == []:
                 return node.get_evaluation()
 
             # Maximizer
@@ -85,6 +94,9 @@ class Minimax:
                 return min_eval
 
 
+        # self.create_tree()
+        return brute_force(self.tree, self.is_max, self.depth)
+    
         return alpha_beta(self.tree, self.is_max, self.depth)
     
 

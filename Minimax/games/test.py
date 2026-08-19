@@ -10,6 +10,8 @@ class State:
         return f"{self.evaluation}"
 
     def get_moves(self):
+        if self.branches is None:
+            self.branches = []
         return self.branches
 
     def get_evaluation(self):
